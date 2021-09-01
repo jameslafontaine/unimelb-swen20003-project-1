@@ -1,4 +1,5 @@
 import bagel.*;
+import bagel.util.Point;
 
 // maybe make a Message class for all the different messages
 // maybe make a class for GameStart
@@ -8,14 +9,18 @@ import bagel.*;
  */
 public class ShadowFlap extends AbstractGame {
     private final Image background = new Image("res/background.png");
+    private final Bird bird = new Bird();
     private static final int FONT_SIZE = 48;
     private final Font font = new Font("res/slkscr.ttf", FONT_SIZE);
+
+    private static final Point SCORE_POINT = new Point(100, 100);
 
     private final String startMessage = "PRESS SPACE TO START";
 
 
     private boolean gameStarted = false;
 
+    private int score = 0;
 
     public ShadowFlap() {
         super(1024, 768, "ShadowFlap");
@@ -36,16 +41,24 @@ public class ShadowFlap extends AbstractGame {
      */
     @Override
     public void update(Input input) {
+
         background.draw(Window.getWidth() / 2.0, Window.getHeight() / 2.0);
+
         if (input.wasPressed(Keys.ESCAPE)) {
             Window.close();
         }
-        if (input.wasPressed(Keys.SPACE)) {
-            gameStarted = true;
-        }
+        // display the starting message until the player presses space bar for the first time and starts the game
         if (!gameStarted) {
             font.drawString(startMessage, Window.getWidth() / 2.0 - font.getWidth(startMessage) / 2.0,
-                    Window.getHeight() / 2.0);
+                    Window.getHeight() / 2.0 + FONT_SIZE / 2.0);
+
+            if (input.wasPressed(Keys.SPACE)) {
+                gameStarted = true;
+            }
+        } else {
+            bird.update(input);
+            font.drawString("SCORE: " + score, SCORE_POINT.x, SCORE_POINT.y);
         }
     }
+
 }
