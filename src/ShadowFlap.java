@@ -10,9 +10,12 @@ import bagel.util.Point;
 public class ShadowFlap extends AbstractGame {
     private final Image background = new Image("res/background.png");
     private final Bird bird = new Bird();
+    private final Pipe pipes = new Pipe();
     private static final int FONT_SIZE = 48;
     private final Font font = new Font("res/slkscr.ttf", FONT_SIZE);
 
+    public static final int WINDOW_WIDTH = 1024;
+    public static final int WINDOW_HEIGHT = 768;
     private static final Point SCORE_POINT = new Point(100, 100);
 
     private final String startMessage = "PRESS SPACE TO START";
@@ -23,7 +26,7 @@ public class ShadowFlap extends AbstractGame {
     private int score = 0;
 
     public ShadowFlap() {
-        super(1024, 768, "ShadowFlap");
+        super(WINDOW_WIDTH, WINDOW_HEIGHT, "ShadowFlap");
 
     }
 
@@ -57,6 +60,7 @@ public class ShadowFlap extends AbstractGame {
             }
         } else {
             bird.update(input);
+            pipes.update();
             font.drawString("SCORE: " + score, SCORE_POINT.x, SCORE_POINT.y);
         }
     }
