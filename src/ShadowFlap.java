@@ -1,14 +1,25 @@
 import bagel.*;
 
+// maybe make a Message class for all the different messages
+// maybe make a class for GameStart
 /**
- * Skeleton Code for SWEN20003 Project 1, Semester 2, 2021
- *
- * Please filling your name below
- * @author:
+ * Please fill in your name below
+ * @author: James La Fontaine
  */
 public class ShadowFlap extends AbstractGame {
+    private final Image background = new Image("res/background.png");
+    private static final int FONT_SIZE = 48;
+    private final Font font = new Font("res/slkscr.ttf", FONT_SIZE);
+
+    private final String startMessage = "PRESS SPACE TO START";
+
+
+    private boolean gameStarted = false;
+
 
     public ShadowFlap() {
+        super(1024, 768, "ShadowFlap");
+
     }
 
     /**
@@ -25,7 +36,16 @@ public class ShadowFlap extends AbstractGame {
      */
     @Override
     public void update(Input input) {
-
+        background.draw(Window.getWidth() / 2.0, Window.getHeight() / 2.0);
+        if (input.wasPressed(Keys.ESCAPE)) {
+            Window.close();
+        }
+        if (input.wasPressed(Keys.SPACE)) {
+            gameStarted = true;
+        }
+        if (!gameStarted) {
+            font.drawString(startMessage, Window.getWidth() / 2.0 - font.getWidth(startMessage) / 2.0,
+                    Window.getHeight() / 2.0);
+        }
     }
-
 }
