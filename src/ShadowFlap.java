@@ -1,8 +1,6 @@
 import bagel.*;
 import bagel.util.Point;
 
-// maybe make a Message class for all the different messages
-// maybe make a class for GameStart
 /**
  * Please fill in your name below
  * @author: James La Fontaine
@@ -14,20 +12,25 @@ public class ShadowFlap extends AbstractGame {
     private static final int FONT_SIZE = 48;
     private final Font font = new Font("res/slkscr.ttf", FONT_SIZE);
 
-    public static final int WINDOW_WIDTH = 1024;
-    public static final int WINDOW_HEIGHT = 768;
+    private static final int WINDOW_WIDTH = 1024;
+    private static final int WINDOW_HEIGHT = 768;
+    private static final String START_MESSAGE = "PRESS SPACE TO START";
     private static final Point SCORE_POINT = new Point(100, 100);
 
-    private final String startMessage = "PRESS SPACE TO START";
-
-
     private boolean gameStarted = false;
-
     private int score = 0;
 
     public ShadowFlap() {
         super(WINDOW_WIDTH, WINDOW_HEIGHT, "ShadowFlap");
 
+    }
+
+    public static int getWindowWidth() {
+        return WINDOW_WIDTH;
+    }
+
+    public static int getWindowHeight() {
+        return WINDOW_HEIGHT;
     }
 
     /**
@@ -52,12 +55,14 @@ public class ShadowFlap extends AbstractGame {
         }
         // display the starting message until the player presses space bar for the first time and starts the game
         if (!gameStarted) {
-            font.drawString(startMessage, Window.getWidth() / 2.0 - font.getWidth(startMessage) / 2.0,
+            font.drawString(START_MESSAGE, Window.getWidth() / 2.0 - font.getWidth(START_MESSAGE) / 2.0,
                     Window.getHeight() / 2.0 + FONT_SIZE / 2.0);
 
             if (input.wasPressed(Keys.SPACE)) {
                 gameStarted = true;
             }
+        // otherwise, the game has started, and we must constantly update and draw the bird and pipes' positions, and
+        // also the score counter
         } else {
             bird.update(input);
             pipes.update();
