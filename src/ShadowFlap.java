@@ -1,5 +1,8 @@
 import bagel.*;
 import bagel.util.Point;
+import bagel.util.Rectangle;
+
+// could make a superclass GameEntity for Bird and Pipe
 
 /**
  * Please fill in your name below
@@ -33,6 +36,13 @@ public class ShadowFlap extends AbstractGame {
         return WINDOW_HEIGHT;
     }
 
+    // check for collision between the bird and the pipes
+    private void checkCollision() {
+        if (bird.getHitbox().intersects(pipes.getHitBoxTop()) || bird.getHitbox().intersects(pipes.getHitboxBottom())) {
+            Window.close();
+        }
+    }
+
     /**
      * The entry point for the program.
      */
@@ -62,11 +72,13 @@ public class ShadowFlap extends AbstractGame {
                 gameStarted = true;
             }
         // otherwise, the game has started, and we must constantly update and draw the bird and pipes' positions, and
-        // also the score counter
+        // we must also draw the score counter, check for collisions and detect a win or a loss
         } else {
             bird.update(input);
             pipes.update();
             font.drawString("SCORE: " + score, SCORE_POINT.x, SCORE_POINT.y);
+
+            checkCollision();
         }
     }
 
