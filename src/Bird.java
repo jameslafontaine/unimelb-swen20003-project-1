@@ -30,7 +30,15 @@ public class Bird {
         return hitbox;
     }
 
+    public Point getPosition() {
+        return new Point(x, y);
+    }
+
     public void update(Input input) {
+
+        // increase the rate at which the bird is falling every frame until the maximum fall velocity is reached
+        velocity = Math.max(MAX_FALL_VELOCITY, velocity + GRAVITY);
+        y -= velocity;
         // set the velocity of the bird to be 6 pixels upwards whenever space bar is pressed
         if (input.wasPressed(Keys.SPACE)) {
             velocity = FLIGHT_SPEED;
@@ -47,11 +55,10 @@ public class Bird {
             hitbox.moveTo(new Point(x - birdWingDown.getWidth() / 2.0, y - birdWingDown.getHeight() / 2.0));
             frameCount++;
         }
-        // increase the rate at which the bird is falling every frame until the maximum fall velocity is reached
-        velocity = Math.max(MAX_FALL_VELOCITY, velocity + GRAVITY);
-        y -= velocity;
+        // visualise the bird's hitbox
 
-
+        // Drawing.drawRectangle(new Point(x - birdWingDown.getWidth() / 2.0, y - birdWingDown.getHeight() / 2.0),
+        //         birdWingDown.getWidth(), birdWingDown.getHeight(), Colour.WHITE);
     }
 
 }

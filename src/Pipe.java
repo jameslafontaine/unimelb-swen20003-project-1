@@ -38,7 +38,15 @@ public class Pipe {
         return hitboxBottom;
     }
 
+    public double getRightX() {
+        return hitboxTop.right();
+    }
+
     public void update() {
+        // move the pipes towards the left border of the screen
+        xTop -= STEP_SIZE;
+        xBottom -= STEP_SIZE;
+
         // draw the top pipe and bottom pipes
         pipe.draw(xTop, yTop);
         pipe.draw(xBottom, yBottom, drawOptions.setRotation(Math.PI));
@@ -47,9 +55,14 @@ public class Pipe {
         hitboxTop.moveTo(new Point(xTop - pipe.getWidth() / 2.0, yTop - pipe.getHeight() / 2.0));
         hitboxBottom.moveTo(new Point(xBottom - pipe.getWidth() / 2.0, yBottom - pipe.getHeight() / 2.0));
 
-        // move the pipes towards the left border of the screen
-        xTop -= STEP_SIZE;
-        xBottom -= STEP_SIZE;
+        // visualise the pipe hitboxes
+
+        // Drawing.drawRectangle(new Point(xTop - pipe.getWidth() / 2.0, yTop - pipe.getHeight() / 2.0),
+        //         pipe.getWidth(), pipe.getHeight(), Colour.WHITE);
+        // Drawing.drawRectangle(new Point(xBottom - pipe.getWidth() / 2.0, yBottom - pipe.getHeight() / 2.0),
+        //         pipe.getWidth(), pipe.getHeight(), Colour.WHITE);
+
+
 
 
     }
