@@ -15,7 +15,7 @@ public class Bird {
     private static final double FLIGHT_SPEED = 6;
     private static final Rectangle hitbox = birdWingDown.getBoundingBoxAt(START_POINT);
 
-    private double x;
+    private final double x;
     private double y;
     private double velocity;
     private int frameCount = 1;
@@ -32,6 +32,14 @@ public class Bird {
 
     public Point getPosition() {
         return new Point(x, y);
+    }
+
+    public double getHeight() {
+        return birdWingDown.getHeight();
+    }
+
+    public double getWidth() {
+        return birdWingDown.getWidth();
     }
 
     public void update(Input input) {

@@ -30,7 +30,6 @@ public class ShadowFlap extends AbstractGame {
 
     public ShadowFlap() {
         super(WINDOW_WIDTH, WINDOW_HEIGHT, "ShadowFlap");
-
     }
 
     public static int getWindowWidth() {
@@ -52,6 +51,11 @@ public class ShadowFlap extends AbstractGame {
     private void lossDetection() {
         // check for collision between the bird and the pipes
         if (bird.getHitbox().intersects(pipes.getHitBoxTop()) || bird.getHitbox().intersects(pipes.getHitboxBottom())) {
+            lossDetected = true;
+        }
+        // check if the bird has moved out-of-bounds
+        if (bird.getPosition().y < -bird.getHeight() / 2.0 || bird.getPosition().y > WINDOW_HEIGHT +
+                                                                                               bird.getHeight() / 2.0) {
             lossDetected = true;
         }
     }
