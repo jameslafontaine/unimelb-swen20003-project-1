@@ -42,6 +42,7 @@ public class Bird {
         // set the velocity of the bird to be 6 pixels upwards whenever space bar is pressed
         if (input.wasPressed(Keys.SPACE)) {
             velocity = FLIGHT_SPEED;
+            y += velocity;
         } else {
             // increase the rate at which the bird is falling every frame until the maximum fall velocity is reached
             velocity = Math.max(MAX_FALL_VELOCITY, velocity + GRAVITY);
