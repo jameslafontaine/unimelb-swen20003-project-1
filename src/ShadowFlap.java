@@ -2,6 +2,7 @@ import bagel.*;
 import bagel.util.Point;
 
 // could make a superclass GameEntity for Bird and Pipe
+// see if there are any blocks of code that could be placed into a method or reformed into a separate class
 
 /**
  * Please fill in your name below
@@ -48,30 +49,31 @@ public class ShadowFlap extends AbstractGame {
         }
     }
 
+    // check if the bird has collided with the pipes or has moved out of bounds and thus if the player has lost
     private void lossDetection() {
-        // check for collision between the bird and the pipes
         if (bird.getHitbox().intersects(pipes.getHitBoxTop()) || bird.getHitbox().intersects(pipes.getHitboxBottom())) {
             lossDetected = true;
         }
-        // check if the bird has moved out-of-bounds
         if (bird.getPosition().y < -bird.getHeight() / 2.0 || bird.getPosition().y > WINDOW_HEIGHT +
                                                                                                bird.getHeight() / 2.0) {
             lossDetected = true;
         }
     }
 
+    // draw the win message at the centre of the screen and the final score 75 pixels below it
     private void drawWin() {
         background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);
         font.drawString(WIN_MESSAGE, CENTRE_SCREEN.x - font.getWidth(WIN_MESSAGE) / 2.0, CENTRE_SCREEN.y);
         font.drawString("FINAL SCORE: " + score, CENTRE_SCREEN.x -
-                font.getWidth("FINAL SCORE: k") / 2.0, CENTRE_SCREEN.y + CENTRE_SCORE_GAP);
+                                    font.getWidth("FINAL SCORE: k") / 2.0, CENTRE_SCREEN.y + CENTRE_SCORE_GAP);
     }
 
+    // draw the loss message at the centre of the screen and the final score 75 pixels below it
     private void drawLoss() {
         background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);
         font.drawString(LOSS_MESSAGE, CENTRE_SCREEN.x - font.getWidth(LOSS_MESSAGE) / 2.0, CENTRE_SCREEN.y);
         font.drawString("FINAL SCORE: " + score, CENTRE_SCREEN.x -
-                font.getWidth("FINAL SCORE: k") / 2.0, CENTRE_SCREEN.y + CENTRE_SCORE_GAP);
+                                    font.getWidth("FINAL SCORE: k") / 2.0, CENTRE_SCREEN.y + CENTRE_SCORE_GAP);
 
     }
 
@@ -98,13 +100,12 @@ public class ShadowFlap extends AbstractGame {
         // display the starting message until the player presses space bar for the first time and starts the game
         if (!gameStarted) {
             font.drawString(START_MESSAGE, CENTRE_SCREEN.x - font.getWidth(START_MESSAGE) / 2.0,
-                    CENTRE_SCREEN.y + FONT_SIZE / 2.0);
-
+                                                                                  CENTRE_SCREEN.y + FONT_SIZE / 2.0);
             if (input.wasPressed(Keys.SPACE)) {
                 gameStarted = true;
             }
         // otherwise, the game has started, and we must constantly update and draw the bird and pipes' positions.
-        // we must also draw the score counter and detect a win or a loss
+        // we must also draw the score counter and detect if a win or a loss has occurred
         } else {
             if (!winDetected && !lossDetected) {
                 bird.update(input);
@@ -119,5 +120,4 @@ public class ShadowFlap extends AbstractGame {
             }
         }
     }
-
 }

@@ -38,31 +38,28 @@ public class Bird {
         return birdWingDown.getHeight();
     }
 
-    public double getWidth() {
-        return birdWingDown.getWidth();
-    }
-
     public void update(Input input) {
-
-        // increase the rate at which the bird is falling every frame until the maximum fall velocity is reached
-        velocity = Math.max(MAX_FALL_VELOCITY, velocity + GRAVITY);
-        y -= velocity;
         // set the velocity of the bird to be 6 pixels upwards whenever space bar is pressed
         if (input.wasPressed(Keys.SPACE)) {
             velocity = FLIGHT_SPEED;
+        } else {
+            // increase the rate at which the bird is falling every frame until the maximum fall velocity is reached
+            velocity = Math.max(MAX_FALL_VELOCITY, velocity + GRAVITY);
+            y -= velocity;
         }
-        // draw the bird with wings up every 10th frame to simulate the flapping of its wings
+
+        // draw the bird, with wings up every 10th frame to simulate the flapping of its wings, and
+        // keep the bird's hitbox aligned with its image
         if (frameCount == FLAP_FRAME) {
             birdWingUp.draw(x, y);
-            // move the bird hitbox to keep it aligned with the bird image
-            hitbox.moveTo(new Point(x - birdWingDown.getWidth() / 2.0, y - birdWingDown.getHeight() / 2.0));
+            hitbox.moveTo(new Point(x - birdWingUp.getWidth() / 2.0, y - birdWingUp.getHeight() / 2.0));
             frameCount = 1;
         } else {
             birdWingDown.draw(x, y);
-            // move the bird hitbox to keep it aligned with the bird image
             hitbox.moveTo(new Point(x - birdWingDown.getWidth() / 2.0, y - birdWingDown.getHeight() / 2.0));
             frameCount++;
         }
+
         // visualise the bird's hitbox
 
         // Drawing.drawRectangle(new Point(x - birdWingDown.getWidth() / 2.0, y - birdWingDown.getHeight() / 2.0),
