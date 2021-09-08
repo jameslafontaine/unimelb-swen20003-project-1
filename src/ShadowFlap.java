@@ -63,17 +63,19 @@ public class ShadowFlap extends AbstractGame {
     // draw the win message at the centre of the screen and the final score 75 pixels below it
     private void drawWin() {
         background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);
-        font.drawString(WIN_MESSAGE, CENTRE_SCREEN.x - font.getWidth(WIN_MESSAGE) / 2.0, CENTRE_SCREEN.y);
+        font.drawString(WIN_MESSAGE, CENTRE_SCREEN.x - font.getWidth(WIN_MESSAGE) / 2.0, CENTRE_SCREEN.y
+                                                                                                     + FONT_SIZE / 2.0);
         font.drawString("FINAL SCORE: " + score, CENTRE_SCREEN.x -
-                                    font.getWidth("FINAL SCORE: k") / 2.0, CENTRE_SCREEN.y + CENTRE_SCORE_GAP);
+                  font.getWidth("FINAL SCORE: k") / 2.0, CENTRE_SCREEN.y + CENTRE_SCORE_GAP + FONT_SIZE / 2.0);
     }
 
     // draw the loss message at the centre of the screen and the final score 75 pixels below it
     private void drawLoss() {
         background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);
-        font.drawString(LOSS_MESSAGE, CENTRE_SCREEN.x - font.getWidth(LOSS_MESSAGE) / 2.0, CENTRE_SCREEN.y);
+        font.drawString(LOSS_MESSAGE, CENTRE_SCREEN.x - font.getWidth(LOSS_MESSAGE) / 2.0, CENTRE_SCREEN.y
+                                                                                                     + FONT_SIZE / 2.0);
         font.drawString("FINAL SCORE: " + score, CENTRE_SCREEN.x -
-                                    font.getWidth("FINAL SCORE: k") / 2.0, CENTRE_SCREEN.y + CENTRE_SCORE_GAP);
+                font.getWidth("FINAL SCORE: k") / 2.0, CENTRE_SCREEN.y + CENTRE_SCORE_GAP + FONT_SIZE / 2.0);
 
     }
 
