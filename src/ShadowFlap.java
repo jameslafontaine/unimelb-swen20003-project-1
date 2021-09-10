@@ -38,7 +38,7 @@ public class ShadowFlap extends AbstractGame {
     }
 
     /**
-     * Check if the bird has surpassed the right x coordinate of the pipes and thus if the player has won
+     * Check if the bird has surpassed the right x coordinate of the pipes and thus if the player has won.
      */
     private void winDetection() {
         if (bird.getPosition().x > pipes.getRightX()) {
@@ -48,7 +48,7 @@ public class ShadowFlap extends AbstractGame {
     }
 
     /**
-     * Check if the bird has collided with the pipes or has moved out of bounds and thus if the player has lost
+     * Check if the bird has collided with the pipes or has moved out of bounds and thus if the player has lost.
      */
     private void lossDetection() {
         if (bird.getHitbox().intersects(pipes.getHitBoxTop()) || bird.getHitbox().intersects(pipes.getHitboxBottom())) {
@@ -61,7 +61,7 @@ public class ShadowFlap extends AbstractGame {
     }
 
     /**
-     * Draw the starting message at the centre of the screen and register when the game has been started
+     * Draw the starting message at the centre of the screen and register when the game has been started.
      */
     private void drawStartMessage() {
         background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);
@@ -70,7 +70,7 @@ public class ShadowFlap extends AbstractGame {
     }
 
     /**
-     * Draw the win/loss message at the centre of the screen and the final score 75 pixels below it
+     * Draw the win/loss message at the centre of the screen and the final score 75 pixels below it.
      */
     private void drawEndMessage(String message) {
         background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);

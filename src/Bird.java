@@ -4,8 +4,8 @@ import bagel.util.Point;
 import bagel.util.Rectangle;
 
 public class Bird {
-    private static final Image birdWingDown = new Image("res/birdWingDown.png");
-    private static final Image birdWingUp = new Image("res/birdWingUp.png");
+    private final Image birdWingDown = new Image("res/birdWingDown.png");
+    private final Image birdWingUp = new Image("res/birdWingUp.png");
 
     private static final Point START_POINT = new Point(200, 350);
     private static final int FLAP_FRAME = 10;
@@ -13,7 +13,7 @@ public class Bird {
     private static final double GRAVITY = -0.1;
     private static final double MAX_FALL_VELOCITY = -10;
     private static final double FLIGHT_SPEED = 6;
-    private static final Rectangle hitbox = birdWingDown.getBoundingBoxAt(START_POINT);
+    private final Rectangle hitbox = birdWingDown.getBoundingBoxAt(START_POINT);
 
     private final double x;
     private double y;

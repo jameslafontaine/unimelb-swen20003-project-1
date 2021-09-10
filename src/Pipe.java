@@ -4,14 +4,14 @@ import bagel.util.Point;
 import bagel.util.Rectangle;
 
 public class Pipe {
-    private static final Image pipe = new Image("res/pipe.png");
+    private final Image pipe = new Image("res/pipe.png");
 
     private static final int PIPE_GAP = 168;
     // step size adjusted so that the game is more playable on my machine
     private static final int STEP_SIZE = 3;
-    private static final Point START_POINT_TOP = new Point(ShadowFlap.getWindowWidth(),
+    private final Point START_POINT_TOP = new Point(ShadowFlap.getWindowWidth(),
                                        ShadowFlap.getWindowHeight() / 2.0 - pipe.getHeight() / 2.0 - PIPE_GAP / 2.0);
-    private static final Point START_POINT_BOTTOM = new Point(ShadowFlap.getWindowWidth(),
+    private final Point START_POINT_BOTTOM = new Point(ShadowFlap.getWindowWidth(),
                                        ShadowFlap.getWindowHeight() / 2.0 + pipe.getHeight() / 2.0 + PIPE_GAP / 2.0);
     private final Rectangle hitboxTop = pipe.getBoundingBoxAt(START_POINT_TOP);
     private final Rectangle hitboxBottom = pipe.getBoundingBoxAt(START_POINT_BOTTOM);
