@@ -2,7 +2,6 @@ import bagel.*;
 import bagel.util.Point;
 
 /**
- * Please fill in your name below
  * @author: James La Fontaine
  */
 public class ShadowFlap extends AbstractGame {
@@ -38,7 +37,9 @@ public class ShadowFlap extends AbstractGame {
         return WINDOW_HEIGHT;
     }
 
-    // check if the bird has surpassed the right x coordinate of the pipes and thus if the player has won
+    /**
+     * Check if the bird has surpassed the right x coordinate of the pipes and thus if the player has won
+     */
     private void winDetection() {
         if (bird.getPosition().x > pipes.getRightX()) {
             winDetected = true;
@@ -46,7 +47,9 @@ public class ShadowFlap extends AbstractGame {
         }
     }
 
-    // check if the bird has collided with the pipes or has moved out of bounds and thus if the player has lost
+    /**
+     * Check if the bird has collided with the pipes or has moved out of bounds and thus if the player has lost
+     */
     private void lossDetection() {
         if (bird.getHitbox().intersects(pipes.getHitBoxTop()) || bird.getHitbox().intersects(pipes.getHitboxBottom())) {
             lossDetected = true;
@@ -57,17 +60,18 @@ public class ShadowFlap extends AbstractGame {
         }
     }
 
-    // draw the starting message at the centre of the screen
-    private void drawStartMessage(Input input) {
+    /**
+     * Draw the starting message at the centre of the screen and register when the game has been started
+     */
+    private void drawStartMessage() {
         background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);
         font.drawString(START_MESSAGE, CENTRE_SCREEN.x - font.getWidth(START_MESSAGE) / 2.0,
                                        CENTRE_SCREEN.y + FONT_SIZE / 2.0);
-        if (input.wasPressed(Keys.SPACE)) {
-            gameStarted = true;
-        }
     }
 
-    // draw the win/loss message at the centre of the screen and the final score 75 pixels below it
+    /**
+     * Draw the win/loss message at the centre of the screen and the final score 75 pixels below it
+     */
     private void drawEndMessage(String message) {
         background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);
         font.drawString(message, CENTRE_SCREEN.x - font.getWidth(message) / 2.0,
@@ -96,7 +100,10 @@ public class ShadowFlap extends AbstractGame {
         }
         // display the starting message until the player presses space bar for the first time and starts the game
         if (!gameStarted) {
-            drawStartMessage(input);
+            drawStartMessage();
+            if (input.wasPressed(Keys.SPACE)) {
+                gameStarted = true;
+            }
         // otherwise, the game has started, and we must constantly update and draw the bird and pipes' positions.
         // we must also draw the score counter and detect if a win or a loss has occurred
         } else {
