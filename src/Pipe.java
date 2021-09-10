@@ -54,16 +54,5 @@ public class Pipe {
         // move the pipe hitboxes to keep them aligned with the pipes
         hitboxTop.moveTo(new Point(xTop - pipe.getWidth() / 2.0, yTop - pipe.getHeight() / 2.0));
         hitboxBottom.moveTo(new Point(xBottom - pipe.getWidth() / 2.0, yBottom - pipe.getHeight() / 2.0));
-
-        // visualise the pipe hitboxes
-
-        // Drawing.drawRectangle(new Point(xTop - pipe.getWidth() / 2.0, yTop - pipe.getHeight() / 2.0),
-        //         pipe.getWidth(), pipe.getHeight(), Colour.WHITE);
-        // Drawing.drawRectangle(new Point(xBottom - pipe.getWidth() / 2.0, yBottom - pipe.getHeight() / 2.0),
-        //         pipe.getWidth(), pipe.getHeight(), Colour.WHITE);
-
-
-
-
     }
 }

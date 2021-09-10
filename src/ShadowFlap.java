@@ -1,9 +1,6 @@
 import bagel.*;
 import bagel.util.Point;
 
-// could make a superclass GameEntity for Bird and Pipe
-// see if there are any blocks of code that could be placed into a method or reformed into a separate class
-
 /**
  * Please fill in your name below
  * @author: James La Fontaine
@@ -55,28 +52,28 @@ public class ShadowFlap extends AbstractGame {
             lossDetected = true;
         }
         if (bird.getPosition().y < -bird.getHeight() / 2.0 || bird.getPosition().y > WINDOW_HEIGHT +
-                                                                                               bird.getHeight() / 2.0) {
+                                                                                     bird.getHeight() / 2.0) {
             lossDetected = true;
         }
     }
 
-    // draw the win message at the centre of the screen and the final score 75 pixels below it
-    private void drawWin() {
+    // draw the starting message at the centre of the screen
+    private void drawStartMessage(Input input) {
         background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);
-        font.drawString(WIN_MESSAGE, CENTRE_SCREEN.x - font.getWidth(WIN_MESSAGE) / 2.0, CENTRE_SCREEN.y
-                                                                                                     + FONT_SIZE / 2.0);
-        font.drawString("FINAL SCORE: " + score, CENTRE_SCREEN.x -
-                  font.getWidth("FINAL SCORE: k") / 2.0, CENTRE_SCREEN.y + CENTRE_SCORE_GAP + FONT_SIZE / 2.0);
+        font.drawString(START_MESSAGE, CENTRE_SCREEN.x - font.getWidth(START_MESSAGE) / 2.0,
+                                       CENTRE_SCREEN.y + FONT_SIZE / 2.0);
+        if (input.wasPressed(Keys.SPACE)) {
+            gameStarted = true;
+        }
     }
 
-    // draw the loss message at the centre of the screen and the final score 75 pixels below it
-    private void drawLoss() {
+    // draw the win/loss message at the centre of the screen and the final score 75 pixels below it
+    private void drawEndMessage(String message) {
         background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);
-        font.drawString(LOSS_MESSAGE, CENTRE_SCREEN.x - font.getWidth(LOSS_MESSAGE) / 2.0, CENTRE_SCREEN.y
-                                                                                                     + FONT_SIZE / 2.0);
-        font.drawString("FINAL SCORE: " + score, CENTRE_SCREEN.x -
-                font.getWidth("FINAL SCORE: k") / 2.0, CENTRE_SCREEN.y + CENTRE_SCORE_GAP + FONT_SIZE / 2.0);
-
+        font.drawString(message, CENTRE_SCREEN.x - font.getWidth(message) / 2.0,
+                                 CENTRE_SCREEN.y + FONT_SIZE / 2.0);
+        font.drawString("FINAL SCORE: " + score, CENTRE_SCREEN.x - font.getWidth("FINAL SCORE: k") / 2.0,
+                                                       CENTRE_SCREEN.y + CENTRE_SCORE_GAP + FONT_SIZE / 2.0);
     }
 
     /**
@@ -94,31 +91,26 @@ public class ShadowFlap extends AbstractGame {
     @Override
     public void update(Input input) {
 
-        background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);
-
         if (input.wasPressed(Keys.ESCAPE)) {
             Window.close();
         }
         // display the starting message until the player presses space bar for the first time and starts the game
         if (!gameStarted) {
-            font.drawString(START_MESSAGE, CENTRE_SCREEN.x - font.getWidth(START_MESSAGE) / 2.0,
-                                                                                  CENTRE_SCREEN.y + FONT_SIZE / 2.0);
-            if (input.wasPressed(Keys.SPACE)) {
-                gameStarted = true;
-            }
+            drawStartMessage(input);
         // otherwise, the game has started, and we must constantly update and draw the bird and pipes' positions.
         // we must also draw the score counter and detect if a win or a loss has occurred
         } else {
             if (!winDetected && !lossDetected) {
+                background.draw(CENTRE_SCREEN.x, CENTRE_SCREEN.y);
                 bird.update(input);
                 pipes.update();
                 font.drawString("SCORE: " + score, SCORE_POINT.x, SCORE_POINT.y);
                 winDetection();
                 lossDetection();
             } else if (winDetected) {
-                drawWin();
+                drawEndMessage(WIN_MESSAGE);
             } else {
-                drawLoss();
+                drawEndMessage(LOSS_MESSAGE);
             }
         }
     }
